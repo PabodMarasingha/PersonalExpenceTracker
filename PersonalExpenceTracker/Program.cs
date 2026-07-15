@@ -1,25 +1,16 @@
-﻿using PersonalExpenseTracker.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 
 namespace PersonalExpenseTracker
 {
-    internal static class Program
+    static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            DatabaseHelper.InitializeDatabase();
-            Application.Run(new MainForm());
+            Application.Run(new SplashScreen());
         }
     }
 }

@@ -52,11 +52,12 @@ namespace PersonalExpenseTracker
 
             dgvSummary.DataSource = table;
 
-            dgvSummary.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(31, 56, 100);
-            dgvSummary.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvSummary.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(15, 20, 40);
+            dgvSummary.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(100, 180, 255);
             dgvSummary.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
             dgvSummary.EnableHeadersVisualStyles = false;
-            dgvSummary.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(242, 247, 252);
+            dgvSummary.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(25, 32, 58);
+            dgvSummary.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(200, 220, 255);
 
             if (expenses.Count == 0)
                 lblTotalVal.Text = "No expenses this month yet.";

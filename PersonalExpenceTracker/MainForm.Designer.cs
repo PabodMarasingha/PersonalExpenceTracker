@@ -1,12 +1,15 @@
-﻿namespace PersonalExpenseTracker
+﻿using System.Windows.Forms;
+
+namespace PersonalExpenseTracker
 {
-    partial class MainForm
+    partial class MainForm : Form
     {
         private System.ComponentModel.IContainer components = null;
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null)) components.Dispose();
+            if (disposing && (components != null))
+                components.Dispose();
             base.Dispose(disposing);
         }
 
@@ -14,6 +17,7 @@
         {
             this.panelTop = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.lblSubtitle = new System.Windows.Forms.Label();
             this.btnDashboard = new System.Windows.Forms.Button();
             this.panelFilter = new System.Windows.Forms.Panel();
             this.lblFilter = new System.Windows.Forms.Label();
@@ -24,6 +28,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.lblTotal = new System.Windows.Forms.Label();
 
             this.panelTop.SuspendLayout();
             this.panelFilter.SuspendLayout();
@@ -31,59 +36,79 @@
             this.panelButtons.SuspendLayout();
             this.SuspendLayout();
 
-            // ── panelTop ──────────────────────────────────
-            this.panelTop.BackColor = System.Drawing.Color.FromArgb(31, 56, 100);
+            // panelTop
+            this.panelTop.BackColor = System.Drawing.Color.FromArgb(75, 0, 130);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTop.Height = 60;
+            this.panelTop.Height = 75;
             this.panelTop.Controls.AddRange(new System.Windows.Forms.Control[] {
-                this.lblTitle, this.btnDashboard });
+                this.lblTitle, this.lblSubtitle, this.btnDashboard });
 
-            // ── lblTitle ──────────────────────────────────
-            this.lblTitle.Text = "💰 Personal Expense Tracker";
+            // lblTitle
+            this.lblTitle.Text = "💰  Personal Expense Tracker";
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14f, System.Drawing.FontStyle.Bold);
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 15f, System.Drawing.FontStyle.Bold);
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Location = new System.Drawing.Point(20, 15);
+            this.lblTitle.Location = new System.Drawing.Point(20, 10);
 
-            // ── btnDashboard ──────────────────────────────
-            this.btnDashboard.Text = "📊 Dashboard";
+            // lblSubtitle
+            this.lblSubtitle.Text = "Track your daily expenses with ease";
+            this.lblSubtitle.ForeColor = System.Drawing.Color.FromArgb(220, 180, 255);
+            this.lblSubtitle.Font = new System.Drawing.Font("Segoe UI", 9f);
+            this.lblSubtitle.AutoSize = true;
+            this.lblSubtitle.Location = new System.Drawing.Point(22, 44);
+
+            // btnDashboard
+            this.btnDashboard.Text = "📊  Dashboard";
             this.btnDashboard.ForeColor = System.Drawing.Color.White;
-            this.btnDashboard.BackColor = System.Drawing.Color.FromArgb(46, 117, 182);
+            this.btnDashboard.BackColor = System.Drawing.Color.FromArgb(100, 0, 180);
             this.btnDashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDashboard.Size = new System.Drawing.Size(120, 35);
-            this.btnDashboard.Location = new System.Drawing.Point(740, 12);
+            this.btnDashboard.FlatAppearance.BorderSize = 0;
+            this.btnDashboard.Size = new System.Drawing.Size(130, 38);
+            this.btnDashboard.Location = new System.Drawing.Point(730, 18);
+            this.btnDashboard.Font = new System.Drawing.Font("Segoe UI", 10f, System.Drawing.FontStyle.Bold);
+            this.btnDashboard.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
 
-            // ── panelFilter ───────────────────────────────
-            this.panelFilter.BackColor = System.Drawing.Color.FromArgb(242, 247, 252);
-            this.panelFilter.Dock = System.Windows.Forms.DockStyle.None;
-            this.panelFilter.Location = new System.Drawing.Point(0, 60);
-            this.panelFilter.Size = new System.Drawing.Size(884, 50);
+            // panelFilter
+            this.panelFilter.BackColor = System.Drawing.Color.FromArgb(245, 240, 255);
+            this.panelFilter.Location = new System.Drawing.Point(0, 75);
+            this.panelFilter.Size = new System.Drawing.Size(884, 52);
             this.panelFilter.Controls.AddRange(new System.Windows.Forms.Control[] {
                 this.lblFilter, this.cboFilter, this.btnClearFilter });
 
-            // ── lblFilter ─────────────────────────────────
+            // lblFilter
             this.lblFilter.Text = "Filter by Category:";
+            this.lblFilter.ForeColor = System.Drawing.Color.FromArgb(75, 0, 130);
             this.lblFilter.AutoSize = true;
-            this.lblFilter.Location = new System.Drawing.Point(15, 15);
-            this.lblFilter.Font = new System.Drawing.Font("Segoe UI", 9f);
+            this.lblFilter.Location = new System.Drawing.Point(15, 16);
+            this.lblFilter.Font = new System.Drawing.Font("Segoe UI", 9f, System.Drawing.FontStyle.Bold);
 
-            // ── cboFilter ─────────────────────────────────
+            // cboFilter
             this.cboFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboFilter.Location = new System.Drawing.Point(155, 12);
+            this.cboFilter.Location = new System.Drawing.Point(155, 13);
             this.cboFilter.Size = new System.Drawing.Size(180, 25);
+            this.cboFilter.Font = new System.Drawing.Font("Segoe UI", 9f);
+            this.cboFilter.BackColor = System.Drawing.Color.White;
+            this.cboFilter.ForeColor = System.Drawing.Color.FromArgb(75, 0, 130);
+            this.cboFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboFilter.SelectedIndexChanged += new System.EventHandler(this.cboFilter_SelectedIndexChanged);
 
-            // ── btnClearFilter ────────────────────────────
+            // btnClearFilter
             this.btnClearFilter.Text = "Show All";
-            this.btnClearFilter.Location = new System.Drawing.Point(350, 11);
-            this.btnClearFilter.Size = new System.Drawing.Size(80, 26);
+            this.btnClearFilter.Location = new System.Drawing.Point(350, 12);
+            this.btnClearFilter.Size = new System.Drawing.Size(80, 28);
             this.btnClearFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearFilter.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(75, 0, 130);
+            this.btnClearFilter.FlatAppearance.BorderSize = 1;
+            this.btnClearFilter.BackColor = System.Drawing.Color.White;
+            this.btnClearFilter.ForeColor = System.Drawing.Color.FromArgb(75, 0, 130);
+            this.btnClearFilter.Font = new System.Drawing.Font("Segoe UI", 9f, System.Drawing.FontStyle.Bold);
+            this.btnClearFilter.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClearFilter.Click += new System.EventHandler(this.btnClearFilter_Click);
 
-            // ── dgvExpenses ───────────────────────────────
-            this.dgvExpenses.Location = new System.Drawing.Point(10, 118);
-            this.dgvExpenses.Size = new System.Drawing.Size(864, 370);
+            // dgvExpenses
+            this.dgvExpenses.Location = new System.Drawing.Point(0, 127);
+            this.dgvExpenses.Size = new System.Drawing.Size(884, 360);
             this.dgvExpenses.AllowUserToAddRows = false;
             this.dgvExpenses.ReadOnly = true;
             this.dgvExpenses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -92,47 +117,69 @@
             this.dgvExpenses.RowHeadersVisible = false;
             this.dgvExpenses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvExpenses.MultiSelect = false;
+            this.dgvExpenses.GridColor = System.Drawing.Color.FromArgb(230, 220, 255);
+            this.dgvExpenses.DefaultCellStyle.BackColor = System.Drawing.Color.White;
+            this.dgvExpenses.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(50, 0, 80);
+            this.dgvExpenses.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(75, 0, 130);
+            this.dgvExpenses.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
+            this.dgvExpenses.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9.5f);
 
-            // ── panelButtons ──────────────────────────────
-            this.panelButtons.BackColor = System.Drawing.Color.FromArgb(242, 247, 252);
+            // panelButtons
+            this.panelButtons.BackColor = System.Drawing.Color.FromArgb(245, 240, 255);
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelButtons.Height = 55;
+            this.panelButtons.Height = 62;
             this.panelButtons.Controls.AddRange(new System.Windows.Forms.Control[] {
-                this.btnAdd, this.btnEdit, this.btnDelete });
+                this.btnAdd, this.btnEdit, this.btnDelete, this.lblTotal });
 
-            // ── btnAdd ────────────────────────────────────
-            this.btnAdd.Text = "➕ Add Expense";
-            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(46, 117, 182);
+            // btnAdd
+            this.btnAdd.Text = "➕  Add Expense";
+            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(75, 0, 130);
             this.btnAdd.ForeColor = System.Drawing.Color.White;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdd.Size = new System.Drawing.Size(130, 35);
-            this.btnAdd.Location = new System.Drawing.Point(15, 10);
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.Size = new System.Drawing.Size(145, 38);
+            this.btnAdd.Location = new System.Drawing.Point(15, 12);
+            this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 10f, System.Drawing.FontStyle.Bold);
+            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
 
-            // ── btnEdit ───────────────────────────────────
-            this.btnEdit.Text = "✏️ Edit";
-            this.btnEdit.BackColor = System.Drawing.Color.FromArgb(91, 155, 213);
+            // btnEdit
+            this.btnEdit.Text = "✏️  Edit";
+            this.btnEdit.BackColor = System.Drawing.Color.FromArgb(120, 50, 180);
             this.btnEdit.ForeColor = System.Drawing.Color.White;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Size = new System.Drawing.Size(100, 35);
-            this.btnEdit.Location = new System.Drawing.Point(160, 10);
+            this.btnEdit.FlatAppearance.BorderSize = 0;
+            this.btnEdit.Size = new System.Drawing.Size(110, 38);
+            this.btnEdit.Location = new System.Drawing.Point(172, 12);
+            this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 10f, System.Drawing.FontStyle.Bold);
+            this.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
 
-            // ── btnDelete ─────────────────────────────────
-            this.btnDelete.Text = "🗑️ Delete";
-            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(192, 80, 77);
+            // btnDelete
+            this.btnDelete.Text = "🗑️  Delete";
+            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(180, 0, 80);
             this.btnDelete.ForeColor = System.Drawing.Color.White;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Size = new System.Drawing.Size(100, 35);
-            this.btnDelete.Location = new System.Drawing.Point(275, 10);
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.Size = new System.Drawing.Size(110, 38);
+            this.btnDelete.Location = new System.Drawing.Point(295, 12);
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 10f, System.Drawing.FontStyle.Bold);
+            this.btnDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
 
-            // ── MainForm ──────────────────────────────────
+            // lblTotal
+            this.lblTotal.Text = "Total: LKR 0.00";
+            this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(75, 0, 130);
+            this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 11f, System.Drawing.FontStyle.Bold);
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(620, 22);
+
+            // MainForm
             this.Text = "Personal Expense Tracker";
-            this.Size = new System.Drawing.Size(900, 600);
+            this.Size = new System.Drawing.Size(900, 620);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Font = new System.Drawing.Font("Segoe UI", 9f);
             this.BackColor = System.Drawing.Color.White;
+            this.Font = new System.Drawing.Font("Segoe UI", 9f);
             this.Controls.AddRange(new System.Windows.Forms.Control[] {
                 this.panelTop, this.panelFilter, this.dgvExpenses, this.panelButtons });
 
@@ -145,9 +192,9 @@
             this.ResumeLayout(false);
         }
 
-        // Control declarations
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Label lblSubtitle;
         private System.Windows.Forms.Button btnDashboard;
         private System.Windows.Forms.Panel panelFilter;
         private System.Windows.Forms.Label lblFilter;
@@ -158,5 +205,6 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Label lblTotal;
     }
 }

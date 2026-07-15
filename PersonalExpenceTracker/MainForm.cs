@@ -30,21 +30,32 @@ namespace PersonalExpenseTracker
             dgvExpenses.DataSource = null;
             dgvExpenses.DataSource = list;
 
-            if (dgvExpenses.Columns.Count > 0 && list.Count > 0)
+            try
             {
-                dgvExpenses.Columns["ExpenseID"].HeaderText = "ID";
-                dgvExpenses.Columns["ExpenseID"].Width = 40;
-                dgvExpenses.Columns["Amount"].HeaderText = "Amount (LKR)";
-                dgvExpenses.Columns["Category"].HeaderText = "Category";
-                dgvExpenses.Columns["Date"].HeaderText = "Date";
-                dgvExpenses.Columns["Description"].HeaderText = "Description";
+                if (dgvExpenses.Columns.Count > 0 && list.Count > 0)
+                {
+                    dgvExpenses.Columns["ExpenseID"].HeaderText = "ID";
+                    dgvExpenses.Columns["ExpenseID"].Width = 40;
+                    dgvExpenses.Columns["Amount"].HeaderText = "Amount (LKR)";
+                    dgvExpenses.Columns["Category"].HeaderText = "Category";
+                    dgvExpenses.Columns["Date"].HeaderText = "Date";
+                    dgvExpenses.Columns["Description"].HeaderText = "Description";
 
-                dgvExpenses.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(31, 56, 100);
-                dgvExpenses.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-                dgvExpenses.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
-                dgvExpenses.EnableHeadersVisualStyles = false;
-                dgvExpenses.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(242, 247, 252);
+                    dgvExpenses.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(75, 0, 130);
+                    dgvExpenses.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+                    dgvExpenses.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
+                    dgvExpenses.EnableHeadersVisualStyles = false;
+                    dgvExpenses.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 240, 255);
+                    dgvExpenses.AlternatingRowsDefaultCellStyle.ForeColor = Color.FromArgb(50, 0, 80);
+                }
             }
+            catch { }
+
+            // Update total label
+            decimal total = 0;
+            foreach (var item in list)
+                total += item.Amount;
+            lblTotal.Text = "Total: LKR " + total.ToString("N2");
         }
 
         // ── Load categories into filter dropdown ─────────
