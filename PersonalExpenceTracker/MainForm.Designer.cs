@@ -19,6 +19,12 @@ namespace PersonalExpenseTracker
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblSubtitle = new System.Windows.Forms.Label();
             this.btnDashboard = new System.Windows.Forms.Button();
+            this.panelSalary = new System.Windows.Forms.Panel();
+            this.lblWelcome = new System.Windows.Forms.Label();
+            this.lblSalaryInfo = new System.Windows.Forms.Label();
+            this.lblRemaining = new System.Windows.Forms.Label();
+            this.progressBudget = new System.Windows.Forms.ProgressBar();
+            this.btnSetSalary = new System.Windows.Forms.Button();
             this.panelFilter = new System.Windows.Forms.Panel();
             this.lblFilter = new System.Windows.Forms.Label();
             this.cboFilter = new System.Windows.Forms.ComboBox();
@@ -69,9 +75,58 @@ namespace PersonalExpenseTracker
             this.btnDashboard.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
 
+            // ── panelSalary ───────────────────────────────────
+            this.panelSalary.BackColor = System.Drawing.Color.FromArgb(60, 0, 110);
+            this.panelSalary.Location = new System.Drawing.Point(0, 75);
+            this.panelSalary.Size = new System.Drawing.Size(884, 80);
+            this.panelSalary.Controls.AddRange(new System.Windows.Forms.Control[] {
+            this.lblWelcome, this.lblSalaryInfo,
+            this.lblRemaining, this.progressBudget, this.btnSetSalary });
+
+            // lblWelcome
+            this.lblWelcome.Text = "👋 Welcome!";
+            this.lblWelcome.ForeColor = System.Drawing.Color.White;
+            this.lblWelcome.Font = new System.Drawing.Font("Segoe UI", 10f, System.Drawing.FontStyle.Bold);
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Location = new System.Drawing.Point(15, 10);
+
+            // lblSalaryInfo
+            this.lblSalaryInfo.Text = "Monthly Salary: Not set";
+            this.lblSalaryInfo.ForeColor = System.Drawing.Color.FromArgb(220, 180, 255);
+            this.lblSalaryInfo.Font = new System.Drawing.Font("Segoe UI", 9f);
+            this.lblSalaryInfo.AutoSize = true;
+            this.lblSalaryInfo.Location = new System.Drawing.Point(15, 35);
+
+            // lblRemaining
+            this.lblRemaining.Text = "Remaining: --";
+            this.lblRemaining.ForeColor = System.Drawing.Color.FromArgb(180, 255, 180);
+            this.lblRemaining.Font = new System.Drawing.Font("Segoe UI", 9f, System.Drawing.FontStyle.Bold);
+            this.lblRemaining.AutoSize = true;
+            this.lblRemaining.Location = new System.Drawing.Point(15, 55);
+
+            // progressBudget
+            this.progressBudget.Location = new System.Drawing.Point(280, 38);
+            this.progressBudget.Size = new System.Drawing.Size(380, 16);
+            this.progressBudget.Maximum = 100;
+            this.progressBudget.Value = 0;
+            this.progressBudget.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBudget.ForeColor = System.Drawing.Color.FromArgb(150, 100, 255);
+
+            // btnSetSalary
+            this.btnSetSalary.Text = "💰 Set Salary";
+            this.btnSetSalary.Location = new System.Drawing.Point(700, 25);
+            this.btnSetSalary.Size = new System.Drawing.Size(120, 34);
+            this.btnSetSalary.BackColor = System.Drawing.Color.FromArgb(100, 0, 180);
+            this.btnSetSalary.ForeColor = System.Drawing.Color.White;
+            this.btnSetSalary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSetSalary.FlatAppearance.BorderSize = 0;
+            this.btnSetSalary.Font = new System.Drawing.Font("Segoe UI", 9f, System.Drawing.FontStyle.Bold);
+            this.btnSetSalary.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSetSalary.Click += new System.EventHandler(this.btnSetSalary_Click);
+
             // panelFilter
             this.panelFilter.BackColor = System.Drawing.Color.FromArgb(245, 240, 255);
-            this.panelFilter.Location = new System.Drawing.Point(0, 75);
+            this.panelFilter.Location = new System.Drawing.Point(0, 155);
             this.panelFilter.Size = new System.Drawing.Size(884, 52);
             this.panelFilter.Controls.AddRange(new System.Windows.Forms.Control[] {
                 this.lblFilter, this.cboFilter, this.btnClearFilter });
@@ -107,8 +162,8 @@ namespace PersonalExpenseTracker
             this.btnClearFilter.Click += new System.EventHandler(this.btnClearFilter_Click);
 
             // dgvExpenses
-            this.dgvExpenses.Location = new System.Drawing.Point(0, 127);
-            this.dgvExpenses.Size = new System.Drawing.Size(884, 360);
+            this.dgvExpenses.Location = new System.Drawing.Point(0, 207);
+            this.dgvExpenses.Size = new System.Drawing.Size(884, 280);
             this.dgvExpenses.AllowUserToAddRows = false;
             this.dgvExpenses.ReadOnly = true;
             this.dgvExpenses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -181,7 +236,8 @@ namespace PersonalExpenseTracker
             this.BackColor = System.Drawing.Color.White;
             this.Font = new System.Drawing.Font("Segoe UI", 9f);
             this.Controls.AddRange(new System.Windows.Forms.Control[] {
-                this.panelTop, this.panelFilter, this.dgvExpenses, this.panelButtons });
+            this.panelTop, this.panelSalary, this.panelFilter,
+            this.dgvExpenses, this.panelButtons });
 
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
@@ -206,5 +262,11 @@ namespace PersonalExpenseTracker
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Panel panelSalary;
+        private System.Windows.Forms.Label lblWelcome;
+        private System.Windows.Forms.Label lblSalaryInfo;
+        private System.Windows.Forms.Label lblRemaining;
+        private System.Windows.Forms.ProgressBar progressBudget;
+        private System.Windows.Forms.Button btnSetSalary;
     }
 }

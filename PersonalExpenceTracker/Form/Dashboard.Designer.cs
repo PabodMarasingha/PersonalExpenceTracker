@@ -129,7 +129,7 @@ namespace PersonalExpenseTracker
 
             // Dashboard Form
             this.Text = "Dashboard";
-            this.Size = new System.Drawing.Size(496, 530);
+            this.Size = new System.Drawing.Size(496, 580);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.BackColor = System.Drawing.Color.FromArgb(15, 20, 40);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using PersonalExpenseTracker.Data;
 using PersonalExpenseTracker.Models;
+using Microsoft.VisualBasic;
 
 namespace PersonalExpenseTracker
 {
@@ -16,13 +17,122 @@ namespace PersonalExpenseTracker
             InitializeComponent();
             LoadCategoriesToFilter();
             LoadExpenses();
+            LoadSalaryInfo();
+        }
+        // ── SALARY METHODS ────────────────────────────────
+
+        private void LoadSalaryInfo()
+        {
+            int year = DateTime.Now.Year;
+            int month = DateTime.Now.Month;
+
+            lblWelcome.Text = "👋 Welcome, " + Session.Username + "!";
+
+            decimal salary = DatabaseHelper.GetSalary(Session.UserID, month, year);
+            decimal spent = GetTotalSpentThisMonth();
+            decimal remaining = salary - spent;
+
+            if (salary > 0)
+            {
+                lblSalaryInfo.Text = "Monthly Salary: LKR " + salary.ToString("N2");
+                lblRemaining.Text = "Remaining: LKR " + remaining.ToString("N2");
+
+                int percentage = (int)((spent / salary) * 100);
+                percentage = Math.Min(percentage, 100);
+                progressBudget.Value = percentage;
+
+                // Change color based on spending
+                if (percentage >= 90)
+                {
+                    progressBudget.ForeColor = System.Drawing.Color.Red;
+                    lblRemaining.ForeColor = System.Drawing.Color.FromArgb(255, 100, 100);
+                }
+                else if (percentage >= 70)
+                {
+                    progressBudget.ForeColor = System.Drawing.Color.Orange;
+                    lblRemaining.ForeColor = System.Drawing.Color.Orange;
+                }
+                else
+                {
+                    progressBudget.ForeColor = System.Drawing.Color.FromArgb(150, 100, 255);
+                    lblRemaining.ForeColor = System.Drawing.Color.FromArgb(180, 255, 180);
+                }
+
+                // Warning if over 80%
+                if (percentage >= 80 && percentage < 100)
+                {
+                    MessageBox.Show(
+                        $"⚠️ Warning!\nYou have spent {percentage}% of your monthly salary!\nRemaining: LKR {remaining:N2}",
+                        "Budget Warning",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                }
+                else if (percentage >= 100)
+                {
+                    MessageBox.Show(
+                        "🚨 Alert!\nYou have exceeded your monthly budget!",
+                        "Budget Exceeded",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                lblSalaryInfo.Text = "Monthly Salary: Not set — click 'Set Salary'";
+                lblRemaining.Text = "Remaining: --";
+                progressBudget.Value = 0;
+            }
+        }
+
+        private decimal GetTotalSpentThisMonth()
+        {
+            var expenses = DatabaseHelper.GetExpensesByMonth(
+                Session.UserID, DateTime.Now.Year, DateTime.Now.Month);
+            decimal total = 0;
+            foreach (var e in expenses)
+                total += e.Amount;
+            return total;
+        }
+
+        private void btnSetSalary_Click(object sender, EventArgs e)
+        {
+            string input = Microsoft.VisualBasic.Interaction.InputBox(
+                "Enter your monthly salary (LKR):",
+                "Set Monthly Salary",
+                "");
+
+            if (string.IsNullOrWhiteSpace(input)) return;
+
+            if (decimal.TryParse(input, out decimal salary) && salary > 0)
+            {
+                DatabaseHelper.SaveSalary(
+                    Session.UserID, salary,
+                    DateTime.Now.Month, DateTime.Now.Year);
+
+                MessageBox.Show(
+                    "Salary saved successfully!",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                LoadSalaryInfo();
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Please enter a valid salary amount!",
+                    "Invalid Input",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
         }
 
         // ── Load expenses into the grid ──────────────────
         private void LoadExpenses()
         {
-            _expenses = DatabaseHelper.GetAllExpenses();
+            _expenses = DatabaseHelper.GetAllExpenses(Session.UserID);
             BindGrid(_expenses);
+            LoadSalaryInfo();
         }
 
         private void BindGrid(List<Expense> list)
@@ -71,7 +181,7 @@ namespace PersonalExpenseTracker
         // ── ADD button ───────────────────────────────────
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            var form = new AddEditForm();
+            var form = new AddEditForm(Session.UserID);
             if (form.ShowDialog() == DialogResult.OK)
                 LoadExpenses();
         }
@@ -142,5 +252,6 @@ namespace PersonalExpenseTracker
             var dash = new Dashboard();
             dash.ShowDialog();
         }
+
     }
 }

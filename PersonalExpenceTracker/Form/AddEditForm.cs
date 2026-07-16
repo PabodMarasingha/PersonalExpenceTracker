@@ -9,15 +9,19 @@ namespace PersonalExpenseTracker
     {
         private Expense _expense;
         private bool _isEdit;
+        private int _userID;
 
-        public AddEditForm()
+        // Adding new expense
+        public AddEditForm(int userID)
         {
             InitializeComponent();
             _isEdit = false;
+            _userID = userID;
             LoadCategories();
             dtpDate.Value = DateTime.Today;
         }
 
+        // Editing existing expense
         public AddEditForm(Expense expense)
         {
             InitializeComponent();
@@ -83,7 +87,7 @@ namespace PersonalExpenseTracker
             }
             else
             {
-                DatabaseHelper.InsertExpense(expense);
+                DatabaseHelper.InsertExpense(expense, _userID);
                 MessageBox.Show("Expense added!", "Success",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using PersonalExpenseTracker.Data;
+using PersonalExpenseTracker.Models;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using PersonalExpenseTracker.Data;
 
 namespace PersonalExpenseTracker
 {
@@ -21,7 +22,7 @@ namespace PersonalExpenseTracker
 
             lblMonth.Text = "📅 " + DateTime.Now.ToString("MMMM yyyy");
 
-            var expenses = DatabaseHelper.GetExpensesByMonth(year, month);
+            var expenses = DatabaseHelper.GetExpensesByMonth(Session.UserID, year, month);
 
             decimal total = 0;
             foreach (var e in expenses)

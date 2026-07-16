@@ -36,9 +36,9 @@ namespace PersonalExpenseTracker
                     try
                     {
                         DatabaseHelper.InitializeDatabase();
-                        MainForm main = new MainForm();
+                        LoginForm login = new LoginForm();
                         this.Hide();
-                        main.ShowDialog();
+                        login.ShowDialog();
                         this.Close();
                     }
                     catch (Exception ex)
